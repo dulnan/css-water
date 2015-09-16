@@ -1,0 +1,1 @@
+var doc=document,math=Math,ms="ms",sinus=math.sin;onload=function(){for(j=15;j>0;j--){var a=doc.createElement("p");for(i=50;i>0;i--){var n=doc.createElement("i"),t=n.style,e=sinus(i*math.random()*5)*i*(20*j)-9999+ms,o=(sinus(j*i/5)+800)*math.sqrt(j/2)+ms;t.webkitAnimationDelay=e,t.webkitAnimationDuration=o,a.appendChild(n)}doc.body.appendChild(a)}};

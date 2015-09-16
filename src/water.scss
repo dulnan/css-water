@@ -1,0 +1,44 @@
+@import 'compass';
+
+html {
+    background: linear-gradient(0deg, #025892 0%, #5aade4 50%, #CDDEE8 50%, #146190 100%);
+    @include filter(contrast(150%));
+    height:100vh;
+}
+
+body {
+    margin: 50vh -9vw;
+    overflow: hidden;
+    @include filter(blur(5px));
+}
+
+@include keyframes(a) {
+    from {
+        @include transform(scaleX(3) translateY(0vh) rotate(-19deg));
+    }
+    to {
+        @include transform(scaleX(4) translateY(4vh) rotate(19deg));
+    }
+}
+
+p,i{
+    display:block;
+}
+
+p {
+    height: 3.3vh;
+    margin: 0;
+}
+
+i {
+    float: right;
+    @include animation(a ease-in-out infinite alternate);
+    width: 4%;
+    height: 65%;
+    margin: 0 -1%;
+    border-radius: 80%;
+    opacity: 0.3;
+    background: linear-gradient(#5aade4,#87c1e8);
+}
+
+p:nth-child(odd) i{float:left;}
