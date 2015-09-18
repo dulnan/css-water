@@ -24,14 +24,14 @@ gulp.task('sass', function () {
 gulp.task('script', ['sass'], function() {
   return gulp.src('src/water.js')
     .pipe(closureCompiler({
-      compilerPath: 'node_modules/google-closure-compiler/compiler.jar',
-      fileName: 'demo.js',
-      compilerFlags: {
-        compilation_level: 'ADVANCED_OPTIMIZATIONS',
-        output_wrapper: '(function(){%output%}).call(window);',
-        jscomp_off: 'checkVars',
-        warning_level: 'VERBOSE'
-      }
+        compilerPath: 'node_modules/google-closure-compiler/compiler.jar',
+        fileName: 'demo.js',
+        compilerFlags: {
+            compilation_level: 'ADVANCED_OPTIMIZATIONS',
+            output_wrapper: '(function(){%output%}).call(window);',
+            jscomp_off: 'checkVars',
+            warning_level: 'VERBOSE'
+        }
     }))
     .pipe(gulp.dest('demo'));
 });
