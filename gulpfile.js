@@ -5,6 +5,7 @@ var gulp = require('gulp'), 
     bower = require('gulp-bower'),
     closureCompiler = require('gulp-closure-compiler'),
     fs = require('fs'),
+    size = require('gulp-size'),
     replace = require('gulp-replace');
 
 
@@ -39,14 +40,18 @@ gulp.task('build', ['script'], function () {
         .pipe(replace('%SCRIPT%', fs.readFileSync('demo/build.js', 'utf8')))
         .pipe(replace('%STYLE%', fs.readFileSync('demo/water.css', 'utf8')))
         .pipe(replace('\n', ''))
+        .pipe(size({
+            title: 'Demo size: ',
+            pretty: false
+        }))
         .pipe(gulp.dest('demo'));
 });
 
 
 // watch files
 gulp.task('watch', function() {
-    gulp.watch('src/*.js', ['script']);
-    gulp.watch('src/*.scss', ['sass']);
+    gulp.watch('src/*.js', ['script', 'build']);
+    gulp.watch('src/*.scss', ['sass', 'build']);
 });
 
 
