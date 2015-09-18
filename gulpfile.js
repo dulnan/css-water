@@ -6,6 +6,7 @@ var gulp = require('gulp'), 
     closureCompiler = require('gulp-closure-compiler'),
     fs = require('fs'),
     size = require('gulp-size'),
+    rename = require('gulp-rename'),
     replace = require('gulp-replace');
 
 
@@ -15,6 +16,7 @@ gulp.task('sass', function () {
         compass: true,
         style: 'compressed'
     })
+    .pipe(rename("demo.css"))
     .pipe(gulp.dest('demo'));
 });
 
@@ -23,7 +25,7 @@ gulp.task('script', ['sass'], function() {
   return gulp.src('src/water.js')
     .pipe(closureCompiler({
       compilerPath: 'node_modules/google-closure-compiler/compiler.jar',
-      fileName: 'build.js',
+      fileName: 'demo.js',
       compilerFlags: {
         compilation_level: 'ADVANCED_OPTIMIZATIONS',
         output_wrapper: '(function(){%output%}).call(window);',
@@ -37,13 +39,14 @@ gulp.task('script', ['sass'], function() {
 // build the demo
 gulp.task('build', ['script'], function () {
     return gulp.src('src/water.html')
-        .pipe(replace('%SCRIPT%', fs.readFileSync('demo/build.js', 'utf8')))
-        .pipe(replace('%STYLE%', fs.readFileSync('demo/water.css', 'utf8')))
+        .pipe(replace('%SCRIPT%', fs.readFileSync('demo/demo.js', 'utf8')))
+        .pipe(replace('%STYLE%', fs.readFileSync('demo/demo.css', 'utf8')))
         .pipe(replace('\n', ''))
         .pipe(size({
-            title: 'Demo size: ',
+            title: 'Demo size:',
             pretty: false
         }))
+        .pipe(rename("demo.html"))
         .pipe(gulp.dest('demo'));
 });
 
