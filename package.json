@@ -1,7 +1,10 @@
 {
   "devDependencies": {
+    "google-closure-compiler": "^20150901.0.0",
     "gulp": "^3.9.0",
+    "gulp-closure-compiler": "^0.3.0",
     "gulp-notify": "^2.2.0",
+    "gulp-replace": "^0.5.4",
     "gulp-ruby-sass": "^2.0.3",
     "gulp-uglify": "^1.4.1"
   }
