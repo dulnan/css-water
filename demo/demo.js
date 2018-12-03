@@ -1,1 +1,0 @@
-(function(){var a=document,b=Math,c=b.sin;onload=function(){for(j=15;0<j;j--){var d=a.createElement("p");for(i=50;0<i;i--){var e=a.createElement("i"),f=e.style,g=c(i*b.random()*5)*i*20*j-9999+"ms",h=(c(j*i/5)+800)*b.sqrt(j/2)+"ms";f.webkitAnimationDelay=g;f.webkitAnimationDuration=h;d.appendChild(e)}a.body.appendChild(d)}};}).call(window);
