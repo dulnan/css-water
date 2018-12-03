@@ -1,9 +1,10 @@
 {
   "name": "css-water",
   "version": "1.0.0",
-  "description": "**[The Demo](http://dulnan.net/water)**",
+  "description": "Water effect with CSS filter and animations",
   "scripts": {
-    "dev": "node dev.js"
+    "build": "node dev.js",
+    "dev": "node dev.js watch"
   },
   "repository": {
     "type": "git",

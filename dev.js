@@ -2,16 +2,10 @@ var fs = require("fs");
 var uglifyjs = require("uglify-js");
 var jscrush = require("./jscrush.js");
 var cleancss = require("clean-css");
-var watch = require('node-watch');
-var express = require("express");
 
 var PLACEHOLDER_STYLE = "__STYLE__";
 var PLACEHOLDER_SCRIPT = "__SCRIPT__";
 
-// Init dev server.
-var app = express();
-app.use(express.static("dist"));
-app.listen(3000);
 
 function build () {
   var htmlRaw = fs.readFileSync("src/water.html", "utf8");
@@ -95,8 +89,19 @@ function build () {
 }
 
 
-watch('src', { recursive: true }, function(evt, name) {
-  build()
-});
-
 build()
+
+var mode = process.argv[2] || '';
+
+// Init dev server.
+if (mode === 'watch') {
+  var watch = require('node-watch');
+  var express = require("express");
+  var app = express();
+  app.use(express.static("dist"));
+  app.listen(3000);
+
+  watch('src', { recursive: true }, function(evt, name) {
+    build()
+  });
+}
