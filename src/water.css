@@ -1,51 +1,39 @@
+@keyframes aside {
+  0% {
+    transform: scaleX(3) rotate(-20deg);
+  }
+  100% {
+    transform: scaleX(4) translateY(4vh) rotate(20deg);
+  }
+}
+body {
+  filter: blur(5px);
+  overflow: hidden;
+  margin: 50vh -9vw;
+}
 html {
   background: linear-gradient(
-    0deg,
-    #025892 0%,
-    #5aade4 50%,
+    #146190 0%,
     #cddee8 50%,
-    #146190 100%
+    #5aade4 50%,
+    #025892 100%
   );
   filter: contrast(150%);
   height: 100vh;
 }
-
-body {
-  margin: 50vh -9vw;
-  overflow: hidden;
-  filter: blur(5px);
-}
-
-@keyframes a {
-  from {
-    transform: scaleX(3) translateY(0vh) rotate(-19deg);
-  }
-  to {
-    transform: scaleX(4) translateY(4vh) rotate(19deg);
-  }
-}
-
-p,
-i {
-  display: block;
-}
-
-p {
-  height: 3.3vh;
-  margin: 0;
-}
-
-i {
-  float: right;
-  animation: a ease-in-out infinite alternate;
-  width: 4%;
-  height: 65%;
-  margin: 0 -1%;
-  border-radius: 80%;
-  opacity: 0.3;
+aside {
   background: linear-gradient(#5aade4, #87c1e8);
+  border-radius: 50%;
+  float: right;
+  height: 60%;
+  width: 5%;
+  margin: 0 -1%;
+  opacity: 0.3;
+}
+main, aside {
+  height: 3.3vh;
 }
 
-p:nth-child(odd) i {
+main:nth-child(odd) aside {
   float: left;
 }

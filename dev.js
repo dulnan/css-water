@@ -1,5 +1,6 @@
 var fs = require("fs");
 var uglifyjs = require("uglify-js");
+var jscrush = require("./jscrush.js");
 var cleancss = require("clean-css");
 var watch = require('node-watch');
 var express = require("express");
@@ -47,13 +48,14 @@ function build () {
     },
     mangle: {
       eval: true,
-      toplevel: true,
+      toplevel: false,
       properties: {
         builtins: true,
         keep_quoted: false,
         reserved: [
           'sin',
           'random',
+          'animation',
           'children',
           'sqrt',
           'createElement',
@@ -77,8 +79,13 @@ function build () {
     warnings: false
   }).code;
   console.log("[JS Packed]  " + jsPacked.length);
+  fs.writeFileSync("dist/packed.js", jsPacked);
 
-  const htmlMinified = htmlRaw.replace("__SCRIPT__", jsPacked);
+  jsPacked = jsPacked.replace(/([\r\n]|^)\s*\/\/.*|[\r\n]+\s*/g,'').replace(/\\/g,'\\\\');
+  var jsCrushed = jscrush(jsPacked)
+  console.log("[JS Crushed] " + jsCrushed.length);
+
+  const htmlMinified = htmlRaw.replace("__SCRIPT__", jsCrushed);
   console.log("====================");
   console.log("T O T A L    " + htmlMinified.length);
   console.log("====================");
